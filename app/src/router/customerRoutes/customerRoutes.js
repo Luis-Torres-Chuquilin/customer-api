@@ -1,35 +1,78 @@
 /** @format */
 
 const express = require("express");
+
+// Api Errors
 const ApiError = require("../../error/apiError");
+// Customer Service - Database Queries
 const CustomerService = require("../../services/customersService/customerService");
-// Models
+// Db model
+const customerSchema = require("../../db/mysql/models/customer");
+// Schema Validator
+const validateSchema = require("../../middlewares/schemaMiddleware");
 
 const customerService = new CustomerService();
+
 const router = express();
 
-router.get("/customer/:id", async (req, res, next) => {
-  let id = req.params.id;
-  let customer = await customerService.findOne(id);
+//  GET customer by customerId
+router.get(
+  "/:id",
 
-  const msg = null;
-  if (!customer) {
-    next(ApiError.notFound("Customer Not Found"));
-    return;
+  validateSchema.validateId(customerSchema.customerId),
+  async (req, res, next) => {
+    let id = parseInt(req.params.id);
+    if (!Number.isInteger(id)) {
+      next(ApiError.badRequestId("CustomerId Must Be a Number"));
+      return;
+    }
+
+    try {
+      let customer = await customerService.findOne(id);
+
+      if (!customer) {
+        next(ApiError.notFound("Customer Not Found"));
+        return;
+      }
+
+      res.setHeader("Content-Type", "application/json");
+      res.send(customer);
+    } catch (e) {
+      next(ApiError.serVerError("Database Error"));
+    }
   }
-  res.send(customer);
+);
+
+// POST customer
+router.post(
+  "/",
+  validateSchema.validatePost(customerSchema.customerPost),
+  async (req, res, next) => {
+    let customer = req.body;
+
+    try {
+      customer = await customerService.create(customer);
+
+      if (!customer) {
+        next(ApiError.notFound("Customer Not Found"));
+        return;
+      }
+      res.send(customer);
+    } catch (e) {
+      next(ApiError.serVerError("Database Error"));
+    }
+  }
+);
+
+// METHOD NOT ALLOW
+router.all("/:id", async (req, res, next) => {
+  next(ApiError.methodNotAllowed("Method Not Allow In This Route"));
+  return;
 });
 
-router.post("/customer", async (req, res, next) => {
-  let customer = req.body;
-
-  customer = await customerService.create(customer);
-
-  if (!customer) {
-    next(ApiError.notFound("Customer Not Found"));
-    return;
-  }
-  res.send(customer);
+router.all("/", async (req, res, next) => {
+  next(ApiError.methodNotAllowed("Method Not Allow In This Route"));
+  return;
 });
 
 module.exports = router;

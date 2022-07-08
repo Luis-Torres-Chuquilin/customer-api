@@ -1,21 +1,13 @@
 /** @format */
 const Sequelize = require("sequelize");
-
-const config = {
-  host: "localhost",
-  username: "root",
-  password: "root",
-  port: 3306,
-  database: "PlansDb",
-  dialect: "mysql",
-};
+const configDatabase = require("../../config/config")["configDatabase"];
 
 let sequelize = new Sequelize({
-  host: config.host,
-  username: config.username,
-  password: config.password,
-  port: config.port,
-  database: config.database,
+  host: configDatabase.host,
+  username: configDatabase.username,
+  password: configDatabase.password,
+  port: configDatabase.port,
+  database: configDatabase.database,
   dialect: "mysql",
 });
 
