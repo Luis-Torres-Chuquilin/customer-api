@@ -1,13 +1,13 @@
 /** @format */
-
-const express = require("express");
+import express, { Request, Response, NextFunction } from "express";
+// const express = require("express");
 const router = require("./router/index");
 //  Correlation id
 const correlator = require("express-correlation-id");
 // Error Middleware
 const errorMiddleware = require("./middlewares/errorMiddleware");
 
-function routeNotFound(req, res, next) {
+function routeNotFound(req: Request, res: Response, next: NextFunction) {
   res.status(404).send({
     status: 404,
     error: "Route not found",
