@@ -26,6 +26,7 @@ app.use("/", router);
 app.use(errorMiddleware);
 app.use(routeNotFound);
 
-// Listen Server
-const PORT = 8000;
-app.listen(8000, () => console.log(`🚀 Server running on port ${PORT} 🚀`));
+// const PORT = 8000;
+// app.listen(8000, () => console.log(`🚀 Server running on port ${PORT} 🚀`));
+
+module.exports = app;

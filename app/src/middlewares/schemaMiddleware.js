@@ -34,5 +34,22 @@ const validateId = (schema) => {
   };
 };
 
+// validate the body in route /customer/ - Path: POST
+const validateUser = (schema) => {
+  return async (req, res, next) => {
+    try {
+      const validateReqBody = await schema.validate(req.body);
+      req.body = validateReqBody;
+      if (req.body.error) {
+        next(ApiError.badRequest(req.body.error));
+      }
+      next();
+    } catch (e) {
+      next(ApiError.badRequest(e));
+    }
+  };
+};
+
 module.exports.validatePost = validatePost;
 module.exports.validateId = validateId;
+module.exports.validateUser = validateUser;
