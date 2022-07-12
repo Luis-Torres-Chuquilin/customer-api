@@ -122,10 +122,20 @@ The below example goes into the JSON body of the POST request while creating a m
 
 ```json
 {
-  "FirstName": "a",
-  "Lastname": "a",
+  "FirstName": "Torres",
+  "Lastname": "Torres",
   "DateOfBirth": "2021-12-23",
   "Gender": "female"
+}
+```
+
+```json
+{
+  "customerId": 2,
+  "FirstName": "Torres",
+  "Lastname": "Torres",
+  "DateOfBirth": "1993-12-01",
+  "Gender": "MALE"
 }
 ```
 
