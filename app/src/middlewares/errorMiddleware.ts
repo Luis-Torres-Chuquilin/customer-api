@@ -1,8 +1,14 @@
 /** @format */
+import express, { Request, Response, NextFunction } from "express";
 
 const ApiError = require("../error/apiError");
 
-const errorMiddleware = (err, req, res, next) => {
+const errorMiddleware = (
+  err: any,
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
   if (err instanceof ApiError) {
     res.status(err.code).json({ status: err.code, message: err.message });
   }
@@ -13,4 +19,6 @@ const errorMiddleware = (err, req, res, next) => {
   });
 };
 
-module.exports = errorMiddleware;
+// module.exports = errorMiddleware;
+
+export default errorMiddleware;

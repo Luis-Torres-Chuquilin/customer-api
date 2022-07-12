@@ -1,7 +1,8 @@
 /** @format */
 
-const request = require("supertest");
-const app = require("../server");
+import request from "supertest";
+
+import app from "../server";
 
 /**
  * Is possible to write the follow conditions in the logic
@@ -45,7 +46,7 @@ describe("Errors user Registration", () => {
   });
 });
 
-describe("Errors user Registration", () => {
+describe("Methods Not Allow", () => {
   let email = "";
 
   beforeAll(() => {
@@ -56,5 +57,13 @@ describe("Errors user Registration", () => {
     await request(app).put("/user/signup").expect(405);
     await request(app).patch("/user/signup").expect(404); // Doble check, it should return 405
     await request(app).delete("/user/signup").expect(405);
+  });
+});
+
+describe("Save user in the Database", () => {
+  test("User save in the database", () => {
+    // send the user to the database
+    // Receive a status 200 ok
+    // Check if the user is in the database
   });
 });

@@ -1,11 +1,11 @@
 /** @format */
 import express, { Request, Response, NextFunction } from "express";
-// const express = require("express");
+
 const router = require("./router/index");
 //  Correlation id
 const correlator = require("express-correlation-id");
 // Error Middleware
-const errorMiddleware = require("./middlewares/errorMiddleware");
+import errorMiddleware from "./middlewares/errorMiddleware";
 
 function routeNotFound(req: Request, res: Response, next: NextFunction) {
   res.status(404).send({
@@ -29,4 +29,5 @@ app.use(routeNotFound);
 // const PORT = 8000;
 // app.listen(8000, () => console.log(`🚀 Server running on port ${PORT} 🚀`));
 
-module.exports = app;
+// module.exports = app;
+export default app;

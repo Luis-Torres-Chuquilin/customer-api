@@ -1,7 +1,8 @@
 /** @format */
 
-const request = require("supertest");
-const app = require("../server");
+import request from "supertest";
+
+import app from "../server";
 
 describe("Test Routes", () => {
   test("returns 404 Route Not Found", async () => {
