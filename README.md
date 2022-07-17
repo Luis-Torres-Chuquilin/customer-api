@@ -29,7 +29,7 @@ $ npm run dev # In the case you want to make change and see the results
 
 To be avaible
 
-# Available endpoints - Backend
+# Available endpoints - Backend 2
 
 | Description                                      | Endpoint        | Method |
 | ------------------------------------------------ | --------------- | ------ |
