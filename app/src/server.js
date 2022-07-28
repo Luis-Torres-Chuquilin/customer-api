@@ -2,8 +2,10 @@
 
 const express = require("express");
 const router = require("./router/index");
-//  Correlation id
-const correlator = require("express-correlation-id");
+
+// Security Headers
+const helmet = require("helmet");
+
 // Error Middleware
 const errorMiddleware = require("./middlewares/errorMiddleware");
 
@@ -16,9 +18,10 @@ function routeNotFound(req, res, next) {
 }
 
 const app = express();
-
+// Third Party Middleware
+app.use(helmet());
 app.use(express.json());
-app.use(correlator());
+
 // Routes
 app.use("/", router);
 
