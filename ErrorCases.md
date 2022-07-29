@@ -2,7 +2,7 @@
 
 # Erros
 
-## `Backend - Handler Cases`
+## `Backend - Handler Erros Cases`
 
 | Method - Route             | Error - Description                               | Error Code | Message sended                 |
 | -------------------------- | ------------------------------------------------- | ---------- | ------------------------------ |
@@ -28,13 +28,6 @@
 | GET, DELETE, PUT, PATCH    | Methods not allow in this route                   | `405`      | Method Not Allow In This Route |
 |                            |                                                   |            |                                |
 | `ALL OTHER ROUTES ==== `   | Rutes are not available                           | `405`      | Route not found                |
-
-## `Backend - Not Network`
-
-| Method - Route         | Error - Description                              | Error Code | Message Display   |
-| ---------------------- | ------------------------------------------------ | ---------- | ----------------- |
-| GET - /movie_score/:id | The Backend is not running / there is not server | `500`      | Networks Problems |
-| POST - /movie_score    | The Backend is not running / there is not server | `500`      | Networks Problems |
 
 # Loggin
 

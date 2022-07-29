@@ -34,6 +34,8 @@ router.post("/signin", async (req, res, next) => {
       return;
     }
 
+    //  JWT -> UTILS
+    //
     const token = jwt.sign({ email: user.email, id: user.id }, secret, {
       expiresIn: "2h",
     });
@@ -73,6 +75,8 @@ router.post("/signup", async (req, res, next) => {
       return user_.username === username;
     });
 
+    //  JWT -> UTILS
+    //
     const token = jwt.sign(
       { email: userCreated.username, id: userCreated.userId },
       secret,
