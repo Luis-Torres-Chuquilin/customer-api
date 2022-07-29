@@ -24,14 +24,30 @@ var users = [
   },
 ];
 
-const configDatabase = {
-  host: "localhost",
-  username: "root",
-  password: "root",
-  port: 3306,
-  database: "PlansDb",
-  dialect: "mysql",
-};
+let configDatabase;
 
+if (!process.env.ENVIRONMENT) {
+  // Local
+  configDatabase = {
+    host: "localhost",
+    username: "root",
+    password: "root",
+    port: 3306,
+    database: "PlansDb",
+    dialect: "mysql",
+  };
+} else {
+  // Docker-Compose
+  configDatabase = {
+    host: process.env.DATABASE_URL,
+    username: process.env.DATABASE_USER,
+    password: process.env.DATABASE_PASS,
+    port: 3306,
+    database: process.env.DATABASE_NAME,
+    dialect: "mysql",
+  };
+}
+
+console.log("configDatabase ===== ", configDatabase);
 module.exports.users = users;
 module.exports.configDatabase = configDatabase;

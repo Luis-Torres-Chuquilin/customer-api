@@ -8,6 +8,7 @@ RUN npm install --only=production
 
 COPY /app ./                      
 
-CMD npm start 
+CMD npx wait-port mysql:3306 && \
+    npm start 
 
 #  COPY /app ./ will copy all the files inside app into the current directoty. It could be COPY /app .

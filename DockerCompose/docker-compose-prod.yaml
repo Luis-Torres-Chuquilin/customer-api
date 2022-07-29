@@ -1,0 +1,29 @@
+# @format
+
+version: "3"
+services:
+  db:
+    image: arm64v8/mysql:oracle
+    restart: always
+    container_name: mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: customers
+
+  customer-api:
+    image: customer-api-image
+    build:
+      context: ../customer-api
+      dockerfile: Dockerfile
+    container_name: customer-api-container
+    ports:
+      - "80:8080"
+    depends_on:
+      - db
+    environment:
+      - PORT=8080
+      - ENVIRONMENT=development
+      - DATABASE_URL=mysql
+      - DATABASE_USER=root
+      - DATABASE_PASS=root
+      - DATABASE_NAME=customers

@@ -36,7 +36,9 @@ if (!process.env.PORT) {
   );
 }
 
-const PORT = process.env.PORT || 8080;
+const PORT = process.env.PORT || 7070;
+
+console.log("====PORT==== Happy Peru", PORT);
 
 // Listen Server
 app.listen(PORT, () => console.log(`🚀 Server running on port ${PORT} 🚀`));
